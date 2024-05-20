@@ -59,7 +59,7 @@ private:
             std::function<void()> func;
             bool dequeued;
 
-            while (!m_pool->m_shutdown) {
+            while (!m_pool->m_shutdown && !m_pool->m_queue.empty()) {
                 {
                     std::unique_lock<std::mutex> lock(m_pool->m_conditional_mutex);
                     if (m_pool->m_queue.empty()) {
